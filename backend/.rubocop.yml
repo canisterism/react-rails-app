@@ -1,0 +1,31 @@
+inherit_mode:
+  merge:
+    - Exclude
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  DisabledByDefault: true
+  Exclude:
+    - "gems/**/*"
+  NewCops: disable
+
+Bundler:
+  Enabled: true
+
+Gemspec:
+  Enabled: true
+
+Lint:
+  Enabled: true
+
+Layout:
+  Enabled: true
+
+Performance:
+  Enabled: true
+
+Security:
+  Enabled: true

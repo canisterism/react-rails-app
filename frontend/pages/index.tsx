@@ -1,29 +1,23 @@
 import Head from "next/head";
 import Image from "next/image";
+import { GetServerSideProps, NextPage } from "next";
 
-import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
+import fetch from "node-fetch";
 
-export default function Home() {
-  const [title, setTitle] = useState<string>("loading...");
+type Props = {
+  title: string;
+};
 
-  useEffect(() => {
-    fetch("http://localhost:3001")
-      .then((res) => res.json())
-      .then((data) => {
-        setTitle(data.message);
-      })
-      .catch((err) => console.log({ err }));
-  }, []);
-
+const Home: NextPage<Props> = (props) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{title}</title>
+        <title>{props.title}</title>
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>{title}</h1>
+        <h1 className={styles.title}>{props.title}</h1>
 
         <p className={styles.description}>
           Get started by editing{" "}
@@ -75,4 +69,21 @@ export default function Home() {
       </footer>
     </div>
   );
-}
+};
+
+export const getServerSideProps: GetServerSideProps = async (_context) => {
+  try {
+    const res = await fetch("http://localhost:3001");
+    const data = (await res.json()) as any;
+    return {
+      props: {
+        title: data.title,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return { props: { title: "Something went wrong" } };
+  }
+};
+
+export default Home;

@@ -4,6 +4,7 @@ import { GetServerSideProps, NextPage } from "next";
 
 import styles from "../styles/Home.module.css";
 import fetch from "node-fetch";
+import { apiBaseURL } from "../config";
 
 type Props = {
   title: string;
@@ -73,7 +74,7 @@ const Home: NextPage<Props> = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async (_context) => {
   try {
-    const res = await fetch("http://localhost:3001");
+    const res = await fetch(apiBaseURL);
     const data = (await res.json()) as any;
 
     return {

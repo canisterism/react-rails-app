@@ -75,9 +75,10 @@ export const getServerSideProps: GetServerSideProps = async (_context) => {
   try {
     const res = await fetch("http://localhost:3001");
     const data = (await res.json()) as any;
+
     return {
       props: {
-        title: data.title,
+        title: data.message,
       },
     };
   } catch (error) {

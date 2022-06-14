@@ -7,7 +7,7 @@
 ```
 （`[.]$`はプロジェクトルートでのコマンド実行）
 
-**docker-composeでDBとフロントエンドのコンテナを立ち上げる**
+**docker-composeでDBのコンテナを立ち上げる**
 
 ```bash
 [.]$ docker-compose up
@@ -18,10 +18,18 @@
 ```bash
 [./backend]$ bin/rails db:create
 ```
+
 **Railsサーバーの立ち上げ**
 
 ```bash
 [./backend]$ bin/rails s -p 3001
+```
+
+
+**Railsサーバーの立ち上げ**
+
+```bash
+[./frontend]$ yarn && yarn dev
 ```
 
 **動作確認**
